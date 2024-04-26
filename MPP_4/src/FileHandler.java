@@ -24,11 +24,21 @@ public class FileHandler {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] pointFromFile = line.split(",");
-                double[] coordinates = new double[pointFromFile.length];
-                for (int i = 0; i < pointFromFile.length; i++) {
-                    coordinates[i] = Double.parseDouble(pointFromFile[i]);
+                try {
+                    Double.parseDouble(pointFromFile[pointFromFile.length - 1]);
+                    double[] coordinates = new double[pointFromFile.length];
+                    for (int i = 0; i < pointFromFile.length; i++) {
+                        coordinates[i] = Double.parseDouble(pointFromFile[i]);
+                    }
+                    Points.add(new Point(coordinates));
+                } catch (NumberFormatException e) {
+                    double[] coordinates = new double[pointFromFile.length - 1];
+                    for (int i = 0; i < pointFromFile.length - 1; i++) {
+                        coordinates[i] = Double.parseDouble(pointFromFile[i]);
+                    }
+                    String name = pointFromFile[pointFromFile.length - 1];
+                    Points.add(new Point(coordinates, name));
                 }
-                Points.add(new Point(coordinates));
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");

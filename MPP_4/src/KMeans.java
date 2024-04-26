@@ -105,4 +105,8 @@ public class KMeans {
         return clusters;
     }
 
+    public List<Point> getPoints() {
+        return points;
+    }
+
 }

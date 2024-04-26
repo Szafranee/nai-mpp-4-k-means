@@ -1,7 +1,11 @@
-import java.util.Arrays;
-
 public class Point {
     double[] coordinates;
+    String name;
+
+    public Point(double[] coordinates, String name) {
+        this.coordinates = coordinates;
+        this.name = name;
+    }
 
     public Point(double[] coordinates) {
         this.coordinates = coordinates;

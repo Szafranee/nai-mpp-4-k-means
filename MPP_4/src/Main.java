@@ -1,4 +1,6 @@
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -22,5 +24,25 @@ public class Main {
         System.out.println("=====================================");
 
         kMeans.classify();
+
+        if (kMeans.getPoints().getFirst().name != null) {
+            System.out.println("==================================");
+            for (Cluster cluster : kMeans.getClusters()) {
+                Map<String, Integer> clusterNames = new HashMap<>();
+                System.out.println("Cluster " + (kMeans.getClusters().indexOf(cluster) + 1) + ": ");
+                for (Point point : cluster.getPoints()) {
+                    if (clusterNames.containsKey(point.name)) {
+                        clusterNames.put(point.name, clusterNames.get(point.name) + 1);
+                    } else {
+                        clusterNames.put(point.name, 1);
+                    }
+                }
+                for (Map.Entry<String, Integer> entry : clusterNames.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                }
+                System.out.println();
+            }
+            System.out.println("==================================");
+        }
     }
 }
